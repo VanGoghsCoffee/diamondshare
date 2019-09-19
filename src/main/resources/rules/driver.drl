@@ -1,0 +1,40 @@
+global com.vangoghscoffee.diamondshare.entities.DiamondExperience diamondExperience;
+import com.vangoghscoffee.diamondshare.entities.Driver
+import com.vangoghscoffee.diamondshare.entities.OSType
+
+dialect  "mvel"
+
+rule "Drivers Device OS Is Of Type Mac"
+    when
+        Driver(device.os == OSType.MAC) from diamondExperience.driver
+    then
+        diamondExperience.fare.deviceSurcharge = 0.4;
+end
+
+rule "Drivers Device OS Is Of Type IOS"
+    when
+        Driver(device.os == OSType.IOS) from diamondExperience.driver
+    then
+        diamondExperience.fare.deviceSurcharge = 0.4;
+end
+
+rule "Drivers Device OS Is Of Type Windows"
+    when
+        Driver(device.os == OSType.WINDOWS) from diamondExperience.driver
+    then
+        diamondExperience.fare.deviceSurcharge = 0.1;
+end
+
+rule "Drivers Device OS Is Of Type Android"
+    when
+        Driver(device.os == OSType.ANDROID) from diamondExperience.driver
+    then
+        diamondExperience.fare.deviceSurcharge = 0.1;
+end
+
+rule "Drivers Device OS Is Of Type Linux"
+    when
+        Driver(device.os == OSType.LINUX) from diamondExperience.driver
+    then
+        diamondExperience.fare.deviceSurcharge = 0.0;
+end

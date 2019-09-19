@@ -1,0 +1,26 @@
+global com.vangoghscoffee.diamondshare.entities.DiamondExperience diamondExperience;
+import com.vangoghscoffee.diamondshare.entities.Car
+import com.vangoghscoffee.diamondshare.entities.CarType
+
+dialect  "mvel"
+
+rule "Selected Car Has More Than 4 Seats"
+    when
+        Car(seats > 4) from diamondExperience.selectedCar
+    then
+        diamondExperience.fare.seatSurcharge = 0.2;
+end
+
+rule "Selected Car Is Of Type Porsche"
+    when
+        Car(type == CarType.PORSCHE) from diamondExperience.selectedCar
+    then
+        diamondExperience.fare.carSurcharge = 0.4;
+end
+
+rule "Selected Car Is Of Type Defender"
+    when
+        Car(type == CarType.DEFENDER) from diamondExperience.selectedCar
+    then
+        diamondExperience.fare.carSurcharge = 0.2;
+end
