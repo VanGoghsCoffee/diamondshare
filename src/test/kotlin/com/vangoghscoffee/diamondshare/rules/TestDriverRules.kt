@@ -41,7 +41,7 @@ class TestDriverRules {
 
         val finalExperience = diamondExperienceService.calculateDiamondFare(selectedCar, allCars, driver)
 
-        Assert.assertEquals(0.4, finalExperience.fare.deviceSurcharge, 0.0)
+        Assert.assertEquals(0.2, finalExperience.fare.deviceSurcharge, 0.0)
     }
 
     @Test
@@ -50,7 +50,7 @@ class TestDriverRules {
 
         val finalExperience = diamondExperienceService.calculateDiamondFare(selectedCar, allCars, driver)
 
-        Assert.assertEquals(0.4, finalExperience.fare.deviceSurcharge, 0.0)
+        Assert.assertEquals(0.3, finalExperience.fare.deviceSurcharge, 0.0)
     }
 
     @Test
@@ -68,15 +68,33 @@ class TestDriverRules {
 
         val finalExperience = diamondExperienceService.calculateDiamondFare(selectedCar, allCars, driver)
 
-        Assert.assertEquals(0.1, finalExperience.fare.deviceSurcharge, 0.0)
+        Assert.assertEquals(0.2, finalExperience.fare.deviceSurcharge, 0.0)
     }
 
     @Test
-    fun `when driver device OS is of type Linux then set device surcharge to 40 cents`() {
+    fun `when driver device OS is of type Linux then set device surcharge to 0 cents`() {
         val driver = Driver("David", CreditCardType.VISA, Device("UserAgent", OSType.LINUX))
 
         val finalExperience = diamondExperienceService.calculateDiamondFare(selectedCar, allCars, driver)
 
         Assert.assertEquals(0.0, finalExperience.fare.deviceSurcharge, 0.0)
+    }
+
+    @Test
+    fun `when driver credit card type is visa then set credit card surcharge to 10 cents`() {
+        val driver = Driver("David", CreditCardType.VISA, Device("UserAgent", OSType.LINUX))
+
+        val finalExperience = diamondExperienceService.calculateDiamondFare(selectedCar, allCars, driver)
+
+        Assert.assertEquals(0.0, finalExperience.fare.creditCardSurcharge, 0.1)
+    }
+
+    @Test
+    fun `when driver credit card type is mastercard then set credit card surcharge to 20 cents`() {
+        val driver = Driver("David", CreditCardType.MASTERCARD, Device("UserAgent", OSType.LINUX))
+
+        val finalExperience = diamondExperienceService.calculateDiamondFare(selectedCar, allCars, driver)
+
+        Assert.assertEquals(0.0, finalExperience.fare.creditCardSurcharge, 0.2)
     }
 }

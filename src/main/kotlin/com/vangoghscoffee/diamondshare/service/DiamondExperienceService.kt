@@ -15,9 +15,10 @@ class DiamondExperienceService(
     fun calculateDiamondFare(selectedCar: Car, allCars: List<Car>, driver: Driver): DiamondExperience {
         val diamondExperience = createEmptyExperience(selectedCar, driver)
         val kieSession: KieSession = kieContainer.newKieSession()
+
+        allCars.forEach{ car -> kieSession.insert(car) }
         kieSession.apply {
             setGlobal("diamondExperience", diamondExperience)
-            insert(allCars)
             fireAllRules()
             dispose()
         }

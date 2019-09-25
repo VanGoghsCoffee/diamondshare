@@ -19,6 +19,7 @@ class DiamondShareConfiguration {
         val kieFileSystem: KieFileSystem = kieServices.newKieFileSystem()
         kieFileSystem.apply {
             write(ResourceFactory.newClassPathResource("rules/selected_car.drl"))
+            write(ResourceFactory.newClassPathResource("rules/other_cars.drl"))
             write(ResourceFactory.newClassPathResource("rules/driver.drl"))
         }
         val kieBuilder: KieBuilder = kieServices.newKieBuilder(kieFileSystem)

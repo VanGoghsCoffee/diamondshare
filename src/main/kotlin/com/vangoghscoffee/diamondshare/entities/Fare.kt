@@ -5,6 +5,6 @@ data class Fare(
     var deviceSurcharge: Double,
     var creditCardSurcharge: Double,
     var carSurcharge: Double,
-    var carsAroundSurcharge: Double,
+    var locationSurcharge: Double,
     var seatSurcharge: Double
 ) {}

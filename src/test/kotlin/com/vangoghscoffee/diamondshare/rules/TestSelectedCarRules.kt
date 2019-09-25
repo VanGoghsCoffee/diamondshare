@@ -52,7 +52,7 @@ class TestSelectedCarRules {
 
         val finalExperience = diamondExperienceService.calculateDiamondFare(selectedCar, allCars, driver)
 
-        Assert.assertEquals(0.4, finalExperience.fare.carSurcharge, 0.0)
+        Assert.assertEquals(0.6, finalExperience.fare.carSurcharge, 0.0)
     }
 
     @Test
@@ -61,6 +61,6 @@ class TestSelectedCarRules {
 
         val finalExperience = diamondExperienceService.calculateDiamondFare(selectedCar, allCars, driver)
 
-        Assert.assertEquals(0.2, finalExperience.fare.carSurcharge, 0.0)
+        Assert.assertEquals(0.42, finalExperience.fare.carSurcharge, 0.0)
     }
 }

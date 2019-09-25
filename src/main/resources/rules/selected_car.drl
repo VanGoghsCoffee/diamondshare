@@ -15,12 +15,12 @@ rule "Selected Car Is Of Type Porsche"
     when
         Car(type == CarType.PORSCHE) from diamondExperience.selectedCar
     then
-        diamondExperience.fare.carSurcharge = 0.4;
+        diamondExperience.fare.carSurcharge = CarType.PORSCHE.getBasePrice();
 end
 
 rule "Selected Car Is Of Type Defender"
     when
         Car(type == CarType.DEFENDER) from diamondExperience.selectedCar
     then
-        diamondExperience.fare.carSurcharge = 0.2;
+        diamondExperience.fare.carSurcharge = CarType.DEFENDER.getBasePrice();
 end

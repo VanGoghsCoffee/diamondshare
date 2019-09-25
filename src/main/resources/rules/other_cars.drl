@@ -1,0 +1,13 @@
+global com.vangoghscoffee.diamondshare.entities.DiamondExperience diamondExperience;
+import com.vangoghscoffee.diamondshare.entities.Car
+import com.vangoghscoffee.diamondshare.entities.Coordinate
+
+dialect  "mvel"
+
+rule "No other car closer than 1km"
+    when
+        $location: Coordinate() from diamondExperience.selectedCar.location
+        not Car(location.distanceTo($location) < 1.00)
+    then
+        diamondExperience.fare.locationSurcharge = 0.5;
+end

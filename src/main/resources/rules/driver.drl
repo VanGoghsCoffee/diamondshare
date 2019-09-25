@@ -1,6 +1,7 @@
 global com.vangoghscoffee.diamondshare.entities.DiamondExperience diamondExperience;
 import com.vangoghscoffee.diamondshare.entities.Driver
 import com.vangoghscoffee.diamondshare.entities.OSType
+import com.vangoghscoffee.diamondshare.entities.CreditCardType
 
 dialect  "mvel"
 
@@ -8,33 +9,47 @@ rule "Drivers Device OS Is Of Type Mac"
     when
         Driver(device.os == OSType.MAC) from diamondExperience.driver
     then
-        diamondExperience.fare.deviceSurcharge = 0.4;
+        diamondExperience.fare.deviceSurcharge = OSType.MAC.getPriceAddition();
 end
 
 rule "Drivers Device OS Is Of Type IOS"
     when
         Driver(device.os == OSType.IOS) from diamondExperience.driver
     then
-        diamondExperience.fare.deviceSurcharge = 0.4;
+        diamondExperience.fare.deviceSurcharge = OSType.IOS.getPriceAddition();
 end
 
 rule "Drivers Device OS Is Of Type Windows"
     when
         Driver(device.os == OSType.WINDOWS) from diamondExperience.driver
     then
-        diamondExperience.fare.deviceSurcharge = 0.1;
+        diamondExperience.fare.deviceSurcharge = OSType.WINDOWS.getPriceAddition();
 end
 
 rule "Drivers Device OS Is Of Type Android"
     when
         Driver(device.os == OSType.ANDROID) from diamondExperience.driver
     then
-        diamondExperience.fare.deviceSurcharge = 0.1;
+        diamondExperience.fare.deviceSurcharge = OSType.ANDROID.getPriceAddition();
 end
 
 rule "Drivers Device OS Is Of Type Linux"
     when
         Driver(device.os == OSType.LINUX) from diamondExperience.driver
     then
-        diamondExperience.fare.deviceSurcharge = 0.0;
+        diamondExperience.fare.deviceSurcharge = OSType.LINUX.getPriceAddition();
+end
+
+rule "Drivers Credit Card Is Mastercard"
+    when
+        Driver(creditCard == CreditCardType.MASTERCARD) from diamondExperience.driver
+    then
+        diamondExperience.fare.creditCardSurcharge = CreditCardType.MASTERCARD.getPriceAddition();
+end
+
+rule "Drivers Credit Card Is VISA"
+    when
+        Driver(creditCard == CreditCardType.VISA) from diamondExperience.driver
+    then
+        diamondExperience.fare.creditCardSurcharge = CreditCardType.VISA.getPriceAddition();
 end
